@@ -212,7 +212,7 @@ public class Employee extends JFrame {
 				if (JOptionPane.showConfirmDialog(frame, "Confirm if you want to Shedule the equipment",
 						"Grizzly's Rental System", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
 
-//					Cust_Request obj1 = new Cust_Request();
+					Cust_Request obj1 = new Cust_Request();
 					String equip_id = textField.getText();
 					try {
 						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/grizzlyentertainment",
@@ -231,12 +231,15 @@ public class Employee extends JFrame {
 
 							if (Stock < quantity) {
 								JOptionPane.showMessageDialog(null, "Not enough equipment in stock");
+								String query3 = ("UPDATE `rental` SET `Status` = 'Failed - Not enough stock' WHERE `rental`.`Equipment ID` = '"+equip_id+"'");
+								PreparedStatement st1 = con.prepareStatement(query3);
+								st1.executeUpdate();
 							} else {
 								Stock = (Stock - quantity);
 								String cost = textField_2.getText();
 								int req_id = Integer.parseInt(textField_1.getText());
 								req_id1 = req_id;
-//								obj1.schedule(cost, req_id, quantity, Stock, equip_id);
+								obj1.schedule(cost, req_id, quantity, Stock, equip_id);
 								textField.setText("");
 								textField_4.setText("");
 								textField_2.setText("$ ");
@@ -268,13 +271,10 @@ public class Employee extends JFrame {
 		JButton btnNewButton_5 = new JButton("Generate Receipt");
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try
-				{
-				table.print();
-				}
-				catch(java.awt.print.PrinterException e1)
-				{
-				System.err.format("An error happend", e1.getMessage());
+				try {
+					table.print();
+				} catch (java.awt.print.PrinterException e1) {
+					System.err.format("An error happend", e1.getMessage());
 				}
 			}
 		});
@@ -330,24 +330,19 @@ public class Employee extends JFrame {
 		JButton btnNewButton_6 = new JButton("Check Stock");
 		btnNewButton_6.setBounds(268, 672, 106, 23);
 		contentPane.add(btnNewButton_6);
-		
+
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(539, 470, 618, 95);
 		contentPane.add(scrollPane_2);
-		
+
 		table_2 = new JTable();
 		scrollPane_2.setViewportView(table_2);
-		table_2.setModel(new DefaultTableModel(
-				new Object[][] {
-					{"Versa Wall - $4000", "Floodlight - $6000", "Amplifier - $9000 ", "Mixing Deck - $7000"},
-					{"Versa Deck - $4500", "Followspots - $8000", "Cam-Lock - $8000", "Microphone - $6000"},
-					{"Versa Shed - $3500", "Fresnels - $7000", "Circuit Panel - $4000", "Loudspeaker - $9000"},
-					{"Scenic Stairs - $3600", "Strip Light - $4000", "Twist Lock - $7000", "Microphone - $7000"},
-				},
-				new String[] {
-					"Staging ", "Lighting", "Power", "Sound"
-				}
-		));
+		table_2.setModel(new DefaultTableModel(new Object[][] {
+				{ "Versa Wall - $4000", "Floodlight - $6000", "Amplifier - $9000 ", "Mixing Deck - $7000" },
+				{ "Versa Deck - $4500", "Followspots - $8000", "Cam-Lock - $8000", "Microphone - $6000" },
+				{ "Versa Shed - $3500", "Fresnels - $7000", "Circuit Panel - $4000", "Loudspeaker - $9000" },
+				{ "Scenic Stairs - $3600", "Strip Light - $4000", "Twist Lock - $7000", "Microphone - $7000" }, },
+				new String[] { "Staging ", "Lighting", "Power", "Sound" }));
 		table_2.getColumnModel().getColumn(0).setPreferredWidth(141);
 		table_2.getColumnModel().getColumn(1).setPreferredWidth(162);
 		table_2.getColumnModel().getColumn(2).setPreferredWidth(169);
@@ -368,8 +363,8 @@ public class Employee extends JFrame {
 
 					textField_5.setText(String.valueOf(Stock));
 
-					//Cust_Request obj = new Cust_Request();
-					//obj.checkStock(equip_id, Stock);
+					Cust_Request obj = new Cust_Request();
+					obj.checkStock(equip_id, Stock);
 
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "Invalid Entry, Enter Correct Equipment ID.");
@@ -377,8 +372,6 @@ public class Employee extends JFrame {
 			}
 
 		});
-		
-		
+
 	}
 }
-
