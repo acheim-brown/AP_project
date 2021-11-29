@@ -1,0 +1,12 @@
+[INFO ] 2021-11-14 22:55:38.028 [main] LoggingExample - Test Info Message
+[INFO ] 2021-11-14 22:55:38.047 [main] LoggingExample - Test Debug Message
+[INFO ] 2021-11-14 22:55:38.050 [main] LoggingExample - Test Error Message
+[INFO ] 2021-11-14 22:55:38.051 [main] LoggingExample - Test Trace Message
+[INFO ] 2021-11-14 22:55:38.052 [main] LoggingExample - Test Fatal Message
+[INFO ] 2021-11-14 22:55:38.053 [main] LoggingExample - Test Warning Message
+[INFO ] 2021-11-14 23:28:57.113 [main] LoggingExample - Test Info Message
+[INFO ] 2021-11-14 23:28:57.155 [main] LoggingExample - Test Debug Message
+[INFO ] 2021-11-14 23:28:57.158 [main] LoggingExample - Test Error Message
+[INFO ] 2021-11-14 23:28:57.159 [main] LoggingExample - Test Trace Message
+[INFO ] 2021-11-14 23:28:57.160 [main] LoggingExample - Test Fatal Message
+[INFO ] 2021-11-14 23:28:57.161 [main] LoggingExample - Test Warning Message
